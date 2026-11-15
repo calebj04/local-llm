@@ -2,7 +2,6 @@ import { TOOLS } from "../data/tools";
 import { getModel } from "../data/models";
 import { useGuide } from "../context/GuideContext";
 import CodeBlock from "../components/CodeBlock";
-import { Link } from "react-router-dom";
 
 export default function Run() {
   const { tool, modelId } = useGuide();
@@ -37,6 +36,13 @@ export default function Run() {
       {tool === "llama" && (
         <div className="panel">
           <h3>Run with llama.cpp</h3>
+          <ol className="steps-list">
+            <li>
+              Get the GGUF weights — e.g. <code className="inline">llama-3.2-3b-instruct-q4_k_m.gguf</code> — into the{" "}
+              <code className="inline">models/</code> folder.
+            </li>
+            <li>Make sure you&rsquo;ve built llama.cpp (<code className="inline">make -j4</code>).</li>
+          </ol>
           <CodeBlock code={`./llama-server -m models/${model.hf} -c 2048 -ngl 999`} label="bash" />
           <p style={{ color: "var(--muted)", fontSize: 13, margin: "12px 0 0" }}>
             The <code className="inline">-ngl 999</code> flag offloads all layers to the GPU (Apple Metal). The{" "}
@@ -45,10 +51,37 @@ export default function Run() {
         </div>
       )}
 
-      <div className="btn-row">
-        <Link className="btn" to="/install">Back</Link>
-        <Link className="btn primary" to="/chat">Next: Chat &amp; API</Link>
-      </div>
+      {tool === "llama" && (
+        <div className="panel">
+          <h3>What the flags actually do</h3>
+          <ol className="steps-list">
+            <li>
+              <code className="inline">-m models/...</code> — path to the GGUF weights file. This is the file you downloaded.
+            </li>
+            <li>
+              <code className="inline">-c 2048</code> — context window in tokens. Bigger means smarter conversations, but each token occupies memory.
+            </li>
+            <li>
+              <code className="inline">-ngl 999</code> — how many layers to shove onto the GPU via Apple Metal. <b>999 means all of them.</b>
+            </li>
+            <li>
+              Add <code className="inline">--threads N</code> to cap CPU threads if you want to share the chip.
+            </li>
+          </ol>
+        </div>
+      )}
+
+      {tool === "ollama" && (
+        <div className="panel">
+          <h3>What just happened</h3>
+          <ol className="steps-list">
+            <li>
+              <code className="inline">ollama run llama3.2:3b</code> — Ollama pulled the model from its registry, applied a
+              default quantization, started the server, and opened a chat loop. You never touched a weight file.
+            </li>
+          </ol>
+        </div>
+      )}
     </div>
   );
 }

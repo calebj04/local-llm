@@ -15,6 +15,14 @@ const ITEMS = [
     q: "Port 11434 already in use",
     a: "Stop the old server or change the port: OLLAMA_HOST=0.0.0.0:8080 ollama serve",
   },
+  {
+    q: "How do I choose a quantization?",
+    a: "Start with Q4_K_M — good quality, small file, fits most Macs. If you’re tight on RAM, drop to Q3_K_M or Q2. Smaller quants mean faster downloads and less memory, with a small quality cost.",
+  },
+  {
+    q: "What do the llama.cpp flags (-m, -c, -ngl) actually do?",
+    a: "-m points at the GGUF weights file. -c sets the context window in tokens (bigger = smarter, more memory). -ngl sets how many layers go to the GPU via Apple Metal — 999 means all of them. Add --threads N to cap CPU threads.",
+  },
 ];
 
 export default function Faq() {

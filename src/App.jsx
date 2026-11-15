@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { GuideProvider } from "./context/GuideContext";
 import Stepper from "./components/Stepper";
+import Pager from "./components/Pager";
 import Home from "./pages/Home";
 import CheckMac from "./pages/CheckMac";
 import Tools from "./pages/Tools";
@@ -15,29 +16,32 @@ export default function App() {
     <GuideProvider>
       <div className="app">
         <Stepper />
-        <main className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/check" element={<CheckMac />} />
-            <Route path="/tools" element={<Tools />} />
-            <Route path="/models" element={<Models />} />
-            <Route path="/install" element={<Install />} />
-            <Route path="/run" element={<Run />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/faq" element={<FaqPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </main>
-        <footer className="footer">
-          <div className="container">
-            <p>
-              Tools &middot; Models: <code>Ollama</code> &middot; <code>LM Studio</code> &middot;{" "}
-              <code>llama.cpp</code> &nbsp;&middot;&nbsp; Models: <code>Llama 3.2</code>,{" "}
-              <code>Qwen2.5</code>, <code>Gemma 3</code>, <code>Mistral</code>
-            </p>
-            <p>Run them locally. Your prompts never leave your Mac.</p>
-          </div>
-        </footer>
+        <div className="app-main">
+          <main className="container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/check" element={<CheckMac />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route path="/models" element={<Models />} />
+              <Route path="/install" element={<Install />} />
+              <Route path="/run" element={<Run />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/faq" element={<FaqPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+            <Pager />
+          </main>
+          <footer className="footer">
+            <div className="container">
+              <p>
+                Tools &middot; Models: <code>Ollama</code> &middot; <code>LM Studio</code> &middot;{" "}
+                <code>llama.cpp</code> &nbsp;&middot;&nbsp; Models: <code>Llama 3.2</code>,{" "}
+                <code>Qwen2.5</code>, <code>Gemma 3</code>, <code>Mistral</code>
+              </p>
+              <p>Run them locally. Your prompts never leave your Mac.</p>
+            </div>
+          </footer>
+        </div>
       </div>
     </GuideProvider>
   );

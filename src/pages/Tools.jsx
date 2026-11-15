@@ -2,7 +2,32 @@ import { TOOL_LIST } from "../data/tools";
 import { useGuide } from "../context/GuideContext";
 import CodeBlock from "../components/CodeBlock";
 import Callout from "../components/Callout";
-import { Link } from "react-router-dom";
+
+const TIERS = [
+  {
+    id: "barebones",
+    name: "Barebones",
+    tool: "llama",
+    tag: "You are the toolchain",
+    desc: "Download the weights yourself, pick the quantization, set the context window and GPU offload by hand, then launch the server. Nothing is automated — you control exactly how the weights are used.",
+    cmd: "./llama-server -m models/llama-3.2-3b-instruct-q4_k_m.gguf -c 2048 -ngl 999",
+  },
+  {
+    id: "gui",
+    name: "Graphical",
+    tool: "lmstudio",
+    tag: "Automation in a GUI",
+    desc: "LM Studio handles the download, the quantization pick and the load for you. The useful knobs — GPU layers, context length — live in the app UI. Point, click, load.",
+  },
+  {
+    id: "automatic",
+    name: "Automatic",
+    tool: "ollama",
+    tag: "One command, sane defaults",
+    desc: "The install script and `ollama run` do the pulling, quantizing and serving behind a single command. Tune via model tags and env vars, but the default path is just one line.",
+    cmd: "ollama run llama3.2:3b",
+  },
+];
 
 export default function Tools() {
   const { tool, setTool } = useGuide();
@@ -40,9 +65,23 @@ export default function Tools() {
         <code className="inline">xcode-select --install</code> may pop a dialog; accept it, then continue.
       </Callout>
 
-      <div className="btn-row">
-        <Link className="btn" to="/models">Back</Link>
-        <Link className="btn primary" to="/install">Next: Install</Link>
+      <div className="panel">
+        <h3>The whole spectrum</h3>
+        <p className="lede">
+          Every way of running a local LLM on this page lives somewhere on a spectrum of control. From literally
+          hand-managing the weights yourself to handing all the work to a one-line installer — the middle is a GUI.
+        </p>
+        <div className="tier-grid">
+          {TIERS.map((t) => (
+            <div className="tier" key={t.id}>
+              <h4>
+                {t.name} <span className="tier-tag">{t.tag}</span>
+              </h4>
+              <p>{t.desc}</p>
+              {t.cmd && <code className="tier-cmd">{t.cmd}</code>}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

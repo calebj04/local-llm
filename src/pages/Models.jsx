@@ -1,7 +1,6 @@
 import { MODELS, getModel } from "../data/models";
 import { useGuide } from "../context/GuideContext";
 import RamPicker from "../components/RamPicker";
-import { Link } from "react-router-dom";
 
 export default function Models() {
   const { ram, setRam, modelId, setModelId } = useGuide();
@@ -46,14 +45,25 @@ export default function Models() {
         })}
       </div>
 
+      <div className="panel">
+        <h3>What the numbers mean</h3>
+        <ol className="steps-list">
+          <li>
+            <b>{model.params} params</b> — the total size of the neural network. Bigger is smarter but bigger to load.
+          </li>
+          <li>
+            <b>{model.quant}</b> — the quantization. A lower bit count means a smaller file with a bit of quality loss.
+            Q4_K_M is the usual sweet spot.
+          </li>
+          <li>
+            <b>~{model.size}GB</b> — the file size on disk. It has to fit in your unified memory along with the context window.
+          </li>
+        </ol>
+      </div>
+
       <div className="callout green">
         <b>Recommended for experimenting:</b> start with{" "}
         <code className="inline">{model.tag}</code> — it&rsquo;s quantized to Q4_K_M and only ~2GB.
-      </div>
-
-      <div className="btn-row">
-        <Link className="btn" to="/tools">Back</Link>
-        <Link className="btn primary" to="/install">Next: Install</Link>
       </div>
     </div>
   );

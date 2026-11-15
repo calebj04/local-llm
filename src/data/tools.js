@@ -26,7 +26,7 @@ export const TOOLS = {
     id: "llama",
     name: "llama.cpp",
     tagline: "Build from source — full control, Metal acceleration.",
-    install: "xcode-select --install\ncd ~/code && git clone https://github.com/ggml-org/llama.cpp.git && cd llama.cpp\nmake -j4",
+    install: "xcode-select --install\ncd ~/code && git clone https://github.com/ggml-org/llama.cpp.git && cd llama.cpp\nmake -j4\n# then grab a .gguf model into the models/ folder (see \"Run it\")",
     installNote: "Requires Xcode Command Line Tools.",
     runTitle: "Run with llama.cpp",
     runCmd: (m) => `./llama-server -m models/${m.hf} -c 2048 -ngl 999`,
