@@ -24,21 +24,21 @@ export default function Home() {
       <section className="hero">
         <span className="kicker">Local LLMs &middot; Apple Silicon &middot; macOS</span>
         <h1>
-          Run local <span className="grad">LLMs</span> on your Mac
+          Your own <span className="grad">LLM</span>, running on your Mac
         </h1>
         <p className="lede">
-          An interactive guide to running large language models on your own machine — from your
-          very first local model to a live API endpoint.
+          Meet your own personal assistant. A chatbot that runs entirely on your Mac — no cloud, no waiting, no
+          leaking your secrets. Just you and your silicon.
         </p>
-        <div className="btn-row" style={{ justifyContent: "center", marginTop: 22 }}>
-          <Link className="btn primary" to="/check">Start: Check your Mac</Link>
+        <div className="btn-row" style={{ justifyContent: "center", marginTop: 26 }}>
+          <Link className="btn primary" to="/check">Let&rsquo;s go: check your Mac</Link>
           <Link className="btn" to="/models">Skip to a model</Link>
         </div>
       </section>
 
       <section>
         <h2>What can you do with a local LLM?</h2>
-        <p className="lede">Everything you'd normally outsource to a cloud API, but with your own hardware underneath.</p>
+        <p className="lede">Everything you&rsquo;d normally outsource to a cloud API, but with your own hardware underneath.</p>
         <div className="cap-grid">
           {CAPS.map((c) => (
             <div className="cap-card" key={c.title}>

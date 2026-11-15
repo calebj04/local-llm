@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const NAV = [
@@ -13,10 +14,27 @@ const NAV = [
 
 export default function Stepper() {
   const location = useLocation();
+  const [theme, setTheme] = useState(() => localStorage.getItem("llm-theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("llm-theme", theme);
+  }, [theme]);
+
   const currentIdx = NAV.findIndex((n) => n.path === location.pathname);
 
   return (
     <nav className="stepper">
+      <div className="stepper-top">
+        <span className="side-title">Local LLM Guide</span>
+        <button
+          className="theme-btn"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label="Toggle color theme"
+        >
+          {theme === "dark" ? "☀️" : "☾"}
+        </button>
+      </div>
       <div className="stepper-inner">
         {NAV.map((n, i) => {
           const active = location.pathname === n.path;

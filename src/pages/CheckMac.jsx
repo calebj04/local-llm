@@ -1,6 +1,7 @@
 import Checklist from "../components/Checklist";
 import RamPicker from "../components/RamPicker";
 import Callout from "../components/Callout";
+import Explain from "../components/Explain";
 import CodeBlock from "../components/CodeBlock";
 import { useGuide } from "../context/GuideContext";
 
@@ -33,6 +34,12 @@ export default function CheckMac() {
       <div className="panel">
         <h3>Your RAM determines what fits</h3>
         <RamPicker />
+        <Explain>
+          <p>
+            <b>In plain English:</b> unified memory is just the RAM your Mac has — the CPU and GPU share it, so an
+            LLM uses it like a tiny playground. More RAM means more room for a bigger brain.
+          </p>
+        </Explain>
         {ram < 12 ? (
           <Callout variant="warn">
             <b>Advice for {ram}GB:</b> stick to tiny/3B quantized models and keep context under 2048 tokens. Expect modest

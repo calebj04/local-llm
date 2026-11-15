@@ -1,6 +1,7 @@
 import { MODELS, getModel } from "../data/models";
 import { useGuide } from "../context/GuideContext";
 import RamPicker from "../components/RamPicker";
+import Explain from "../components/Explain";
 
 export default function Models() {
   const { ram, setRam, modelId, setModelId } = useGuide();
@@ -59,6 +60,12 @@ export default function Models() {
             <b>~{model.size}GB</b> — the file size on disk. It has to fit in your unified memory along with the context window.
           </li>
         </ol>
+        <Explain>
+          <p>
+            <b>In plain English:</b> quantization shrinks the model&rsquo;s brain so it fits your RAM — smaller file,
+            slightly smaller brain, faster replies. Q4_K_M is the friendly default.
+          </p>
+        </Explain>
       </div>
 
       <div className="callout green">

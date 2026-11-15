@@ -1,4 +1,12 @@
+const ICONS = { warn: "⚠️", green: "✅", plain: "💡" };
+
 export default function Callout({ variant, children }) {
   const cls = "callout" + (variant ? " " + variant : "");
-  return <div className={cls}>{children}</div>;
+  const icon = ICONS[variant] || "💡";
+  return (
+    <div className={cls}>
+      <span className="callout-icon">{icon}</span>
+      <div>{children}</div>
+    </div>
+  );
 }

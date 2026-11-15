@@ -6,6 +6,7 @@ import Callout from "../components/Callout";
 const TIERS = [
   {
     id: "barebones",
+    emoji: "🧰",
     name: "Barebones",
     tool: "llama",
     tag: "You are the toolchain",
@@ -14,6 +15,7 @@ const TIERS = [
   },
   {
     id: "gui",
+    emoji: "🖥️",
     name: "Graphical",
     tool: "lmstudio",
     tag: "Automation in a GUI",
@@ -21,6 +23,7 @@ const TIERS = [
   },
   {
     id: "automatic",
+    emoji: "⚡",
     name: "Automatic",
     tool: "ollama",
     tag: "One command, sane defaults",
@@ -75,7 +78,7 @@ export default function Tools() {
           {TIERS.map((t) => (
             <div className="tier" key={t.id}>
               <h4>
-                {t.name} <span className="tier-tag">{t.tag}</span>
+                {t.emoji} {t.name} <span className="tier-tag">{t.tag}</span>
               </h4>
               <p>{t.desc}</p>
               {t.cmd && <code className="tier-cmd">{t.cmd}</code>}

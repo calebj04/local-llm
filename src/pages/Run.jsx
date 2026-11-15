@@ -11,7 +11,7 @@ export default function Run() {
   return (
     <div className="page">
       <h2>5. Download &amp; run the model</h2>
-      <p className="lede">This is the moment. With small quantized models, downloads land at ~1–4GB.</p>
+      <p className="lede">This is the big moment. Small models, small downloads (~1–4GB).</p>
 
       <div className="panel">
         <h3>{toolData.runTitle}</h3>
